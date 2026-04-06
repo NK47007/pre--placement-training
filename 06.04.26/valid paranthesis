@@ -1,0 +1,28 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack <Character> st=new Stack<>();
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(ch=='['||ch=='('||ch=='{'){ //opening brackets are pushed into stack
+                st.push(ch);
+            }
+            else if(!st.isEmpty()){//when stack is not empty ,the brackets are compared
+                if((ch==']' && st.peek()=='[')||(ch=='}' && st.peek()=='{')||(ch==')' && st.peek()=='(')){
+                    st.pop();
+                }
+                else{ //if not matching then false
+                    return false;
+                }
+            }
+            else {
+                return false; // when the stack is empty and closing brackets are being compared
+            }
+        }
+        if(st.isEmpty()){
+            return true; //to check whether all the bracts are matched and no extras
+        }
+        else{
+            return false;
+        }
+    }
+}
